@@ -91,7 +91,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\scshape Model}
 \subsection{frame 1}
-\begin{frame}{Definition} %%% MODEL 1 %%%
+\begin{frame}{Model} %%% MODEL 1 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -128,7 +128,7 @@
 \end{tabular}
 \end{frame}
 \miniframesoff
-\begin{frame}{Definition} %%% MODEL 1 %%%
+\begin{frame}{Model} %%% MODEL 1 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -165,7 +165,7 @@
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Definition} %%% MODEL 2 %%%
+\begin{frame}{Model} %%% MODEL 2 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -206,7 +206,7 @@
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Definition} %%% MODEL 3 %%%
+\begin{frame}{Model} %%% MODEL 3 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -277,7 +277,7 @@
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Definition} %%% MODEL 4 %%%
+\begin{frame}{Model} %%% MODEL 4 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -2271,8 +2271,9 @@
     \end{itemize} 
 \end{frame}
 \miniframeson
-\begin{frame}
+\begin{frame}{Line Exploration Problem}
 Algorithm : Setup Phase + Exploration Phase
+\\[0.3in] 
    \begin{itemize}
      \item Any initial configuration. 
      \item Line explored.
@@ -2285,9 +2286,206 @@ Algorithm : Setup Phase + Exploration Phase
 \section{\scshape Results}
 \subsection{Frame 1}
 \miniframeson
-\begin{frame}{Final configuration}
-
+\begin{frame}{Terminal configuration}
+Terminal configuration must contain a tower.
+\\[0.3in] 
+\begin{itemize}
+     \item Initial configuration cannot be terminal.
+     \item Configurations without towers: potential initial configurations.
+    \end{itemize} 
+\end{frame}
+%\miniframesoff
+\begin{frame}{Exploration with 1 robot}
+\textcolor{gray}{Terminal configuration must contain a tower.}
+\\[0.3in] 
+If $k = 1$, then the exploration of the line is impossible. 
+\end{frame}
+\begin{frame}{Exploration with 2 robots}
+If $k = 1$, then the exploration of the line is impossible, even if the robots agree on a common orientation of it. 
 \end{frame}
 \miniframesoff
+\begin{frame}{Exploration with 2 robots}
+If $k = 1$, then the exploration of the line is impossible, even if the robots agree on a common orientation of it. 
+\\[0.3in] 
+Suppose there exists an algorithm A. Let $n\geq3$.
+
+
+\end{frame}
+
+\begin{frame}{Exploration with 2 robots}
+Suppose there exists an algorithm A. Let $n\geq3$.
+\\[0.3in]
+There exists a finite sequence of configuration:\\
+from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\textit{terminal configuration} }. \\[0.1in]
+ \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}%[yshift=-3cm]
+     \node[main node, draw, color=blue](b) at (2,5) {};
+      \node[main node,draw] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[main node,draw] (d) at (6,5) {};
+       \node[main node,draw] (e) at (8,5) {};    
+      \node[main node,draw]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[->,line width=0.3pt] (b) edge [bend left] (c);
+       \path[->,line width=0.3pt] (c) edge [bend left] (d);
+       \path[-,line width=0.3pt, loosely dotted]  (d) edge  (e);
+       %\path[->,line width=0.3pt]  (d) edge [bend left] (e);
+      \path[->,line width=0.3pt] (e) edge [bend left] (f);
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture}
+\end{frame}
+\begin{frame}{Exploration with 2 robots}
+Suppose there exists an algorithm A. Let $n\geq3$.
+\\[0.3in]
+There exists a finite sequence of configuration:\\
+from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\textit{terminal configuration} }. \\[0.1in]
+ \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}%[yshift=-3cm]
+     \node[main node, draw, color=blue](b) at (2,5) {};
+      \node[main node,draw] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[main node,draw] (d) at (6,5) {};
+       \node[main node,draw] (e) at (8,5) {};    
+      \node[main node,fill=red]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[->,line width=0.3pt] (b) edge [bend left] (c);
+       \path[->,line width=0.3pt] (c) edge [bend left] (d);
+       \path[-,line width=0.3pt, loosely dotted]  (d) edge  (e);
+       %\path[->,line width=0.3pt]  (d) edge [bend left] (e);
+      \path[->,line width=0.3pt] (e) edge [bend left] (f);
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} \\
+  Consider the \textcolor{red}{configuration} preceding the terminal one. \\
+  It has no towers, that is, it is a potential initial configuration.
+\end{frame}
+\begin{frame}{Exploration with 2 robots}
+Suppose there exists an algorithm A. Let $n\geq3$.
+\\[0.3in]
+There exists a finite sequence of configuration:\\
+from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\textit{terminal configuration} }. \\[0.1in]
+ \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}%[yshift=-3cm]
+     \node[main node, draw, color=blue](b) at (2,5) {};
+      \node[main node,draw] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[main node,draw] (d) at (6,5) {};
+       \node[main node,draw] (e) at (8,5) {};    
+      \node[main node,draw]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[->,line width=0.3pt] (b) edge [bend left] (c);
+       \path[->,line width=0.3pt] (c) edge [bend left] (d);
+       \path[-,line width=0.3pt, loosely dotted]  (d) edge  (e);
+       %\path[->,line width=0.3pt]  (d) edge [bend left] (e);
+      \path[->,line width=0.3pt] (e) edge [bend left] (f);
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+     \begin{scope}[yshift=-2cm]
+     \node[main node, draw, color=blue](f) at (10,5){};
+   
+    \end{scope}
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Exploration with 2 robots}
+There exists a finite sequence of configuration:\\
+from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\textit{terminal configuration} }. \\[0.1in]
+ \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}%[yshift=-3cm]
+     \node[main node, draw, color=blue](b) at (2,5) {};
+      \node[main node,draw] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[main node,draw] (d) at (6,5) {};
+       \node[main node,draw] (e) at (8,5) {};    
+      \node[main node,draw]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[->,line width=0.3pt] (b) edge [bend left] (c);
+       \path[->,line width=0.3pt] (c) edge [bend left] (d);
+       \path[-,line width=0.3pt, loosely dotted]  (d) edge  (e);
+       %\path[->,line width=0.3pt]  (d) edge [bend left] (e);
+      \path[->,line width=0.3pt] (e) edge [bend left] (f);
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+     \begin{scope}[yshift=-2cm]
+     \node[main node, draw, color=blue](f) at (10,5){};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture}
+\end{frame}
+\begin{frame}{Exploration with 2 robots}
+There exists a finite sequence of configuration:\\
+from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\textit{terminal configuration} }. \\[0.1in]
+ \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}%[yshift=-3cm]
+     \node[main node, draw, color=blue](b) at (2,5) {};
+      \node[main node,draw] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[main node,draw] (d) at (6,5) {};
+       \node[main node,draw] (e) at (8,5) {};    
+      \node[main node,draw]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[->,line width=0.3pt] (b) edge [bend left] (c);
+       \path[->,line width=0.3pt] (c) edge [bend left] (d);
+       \path[-,line width=0.3pt, loosely dotted]  (d) edge  (e);
+       %\path[->,line width=0.3pt]  (d) edge [bend left] (e);
+      \path[->,line width=0.3pt] (e) edge [bend left] (f);
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+     \begin{scope}[yshift=-2cm]
+     \node[main node, draw, color=blue](f) at (10,5){};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[diamond,draw, color=brown] (i) at (12,5) {};
+      \path[->,line width=0.3pt] (f) edge [bend left] (i);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} \\
+  We use that robots are \textit{oblivious} and \textit{deterministic}. \\
+  They form a tower in first step. \\
+  Line is not explored. $\Rightarrow\Leftarrow$ %$\smashtimes$
+\end{frame}
+\miniframeson
+\begin{frame}{Other results}
+
+\end{frame}
+\begin{frame}
+\begin{center}
+Thank you!\\[0.2in]
+\includegraphics[width=.6\textwidth,right]{robot2.jpeg}
+\end{center}
+
+\end{frame}
+
+
 
 \end{document}
