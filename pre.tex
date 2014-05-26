@@ -7,6 +7,18 @@
 %%
 
 \documentclass[xcolor=x11names,compress]{beamer}
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
 
 %% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
@@ -115,7 +127,7 @@
     &  \\
 \end{tabular}
 \end{frame}
-
+\miniframesoff
 \begin{frame}{Definition} %%% MODEL 1 %%%
 \begin{tabular}{rl}
   \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -335,7 +347,7 @@
   & \\
 \end{tabular}
 \end{frame}
-
+\miniframeson
 \begin{frame}{Look}
 %\resizebox{<horizontal size>}{<vertical size>}{%
     \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -377,7 +389,7 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
-
+\miniframesoff
 \begin{frame}{Look}
 
 %\resizebox{<horizontal size>}{<vertical size>}{%
@@ -518,6 +530,7 @@
   \end{tikzpicture}
 \end{frame}
 
+\miniframeson
 \begin{frame}{Look} %%% CYCLE 1 %%%
 
     \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -543,9 +556,7 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
-
-%\begin{frame}{Compute} %%% CYCLE 2 %%%
-
+\miniframesoff
 \begin{frame}{Compute} %%% CYCLE 5 %%%
 
     \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -571,7 +582,6 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
-
 
 \begin{frame}{Move} %%% CYCLE 1 %%%
 
@@ -728,7 +738,7 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
-
+\miniframeson
 \begin{frame}{Robots: Asynchronous} %%% CYCLE 7 %%%
 
     \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -755,7 +765,7 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
-
+\miniframesoff
 \begin{frame}{Robots: Asynchronous} %%% CYCLE 7 %%%
 
     \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -840,6 +850,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\miniframeson
 \section{\scshape Problem}
 \subsection{Exploration}
 \begin{frame}{Exploration with termination}
@@ -849,7 +860,7 @@
  \item \textcolor{gray}{after finite time robots should stay idle}
 \end{itemize}
 \end{frame}
-
+\miniframesoff
 \begin{frame}{Exploration with termination}
 \begin{itemize}
  \item \textcolor{gray}{initial configuration with no towers}
@@ -865,7 +876,7 @@
  \item after finite time robots should stay idle
 \end{itemize}
 \end{frame}
-
+\miniframeson
 \subsection{Subproblem 1}
 \begin{frame}{Subproblem 1: Setup Phase}
 
@@ -903,6 +914,7 @@
  \end{itemize}
  
 \end{frame}
+\miniframesoff
 
 
 \begin{frame}{Subproblem 1: Setup Phase}
@@ -1424,7 +1436,6 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-
 \begin{frame}{Subproblem 1: Setup Phase}
  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -1455,7 +1466,6 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-
 \begin{frame}{Subproblem 1: Setup Phase}
  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -1516,7 +1526,6 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-
 \begin{frame}{Subproblem 1: Setup Phase}
  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -1547,7 +1556,6 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-
 \begin{frame}{Subproblem 1: Setup Phase}
  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -1727,8 +1735,9 @@
       %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
     \end{scope}
   \end{tikzpicture} \\
-\end{frame}\begin{frame}{Subproblem 1: Setup Phase}
- \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+\end{frame}
+\begin{frame}{Subproblem 1: Setup Phase}
+\begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
    \begin{scope}%[xshift=10cm]
      \node[small node,fill=gray] (b) at (2,5) {};
@@ -1817,66 +1826,6 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-% \begin{frame}{Subproblem 1: Setup Phase}
-%  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-%     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
-%    \begin{scope}%[xshift=10cm]
-%      \node[small node,fill=gray] (b) at (2,5) {};
-%       \node[small node,fill=gray] (c) at (4,5) {};
-%       %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
-%       \node[small node,fill=gray] (d) at (6,5) {};
-%       \node[small node,fill=black] (e) at (8,5) {};    
-%       \node[small node,fill=gray]  (f) at (10,5) {};
-%       %\node[small node,fill=pink]  at (10,5) {};
-%       \node[small node,fill=pink] (i) at (12,5) {};
-%       \node[small node,fill=black] (j) at (14,5) {};
-%       \node[small node,fill=black] (k) at (16,5) {};
-%       \node[small node,fill=black] (l) at (18,5) {};
-%       %\node[small node,fill=gray] (m) at (20,5) {};
-%        \path[-,line width=0.3pt] (b) edge (c);
-%        \path[-,line width=0.3pt] (c) edge (d);
-%        \path[-,line width=0.3pt]  (d) edge (e);
-%       \path[-,line width=0.3pt] (e) edge (f);
-%       \path[-,line width=0.3pt] (f) edge (i);
-%       \path[-,line width=0.3pt] (i) edge (j);
-%       \path[-,line width=0.3pt] (j) edge (k);
-%       \path[-,line width=0.3pt] (k) edge (l);
-%       \path[->, line width=0.5pt] (8,7) edge (12,7);
-%       %\path[-,line width=0.3pt] (l) edge (m);
-%       %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
-%     \end{scope}
-%   \end{tikzpicture} \\
-% \end{frame}
-% \begin{frame}{Subproblem 1: Setup Phase}
-%  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-%     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
-%    \begin{scope}%[xshift=10cm]
-%      \node[small node,fill=gray] (b) at (2,5) {};
-%       \node[small node,fill=gray] (c) at (4,5) {};
-%       %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
-%       \node[small node,fill=gray] (d) at (6,5) {};
-%       \node[small node,fill=pink] (e) at (8,5) {};    
-%       \node[small node,fill=gray]  (f) at (10,5) {};
-%       %\node[small node,fill=pink]  at (10,5) {};
-%       \node[small node,fill=pink] (i) at (12,5) {};
-%       \node[small node,fill=black] (j) at (14,5) {};
-%       \node[small node,fill=black] (k) at (16,5) {};
-%       \node[small node,fill=black] (l) at (18,5) {};
-%       %\node[small node,fill=gray] (m) at (20,5) {};
-%        \path[-,line width=0.3pt] (b) edge (c);
-%        \path[-,line width=0.3pt] (c) edge (d);
-%        \path[-,line width=0.3pt]  (d) edge (e);
-%       \path[-,line width=0.3pt] (e) edge (f);
-%       \path[-,line width=0.3pt] (f) edge (i);
-%       \path[-,line width=0.3pt] (i) edge (j);
-%       \path[-,line width=0.3pt] (j) edge (k);
-%       \path[-,line width=0.3pt] (k) edge (l);
-%       \path[->, line width=0.5pt] (8,7) edge (12,7);
-%       %\path[-,line width=0.3pt] (l) edge (m);
-%       %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
-%     \end{scope}
-%   \end{tikzpicture} \\
-% \end{frame}
 \begin{frame}{Subproblem 1: Setup Phase}
  \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
     thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
@@ -1937,23 +1886,408 @@
     \end{scope}
   \end{tikzpicture} \\
 \end{frame}
-
-
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{frame 1}
-%\begin{frame}{frame 1}
-%
-%\end{frame}
-%
+\miniframeson
+\subsection{subproblem 2}
+
+\begin{frame}{Subproblem 2: Line Exploration}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[small node,fill=black] (b) at (2,5) {};
+      \node[small node,fill=black] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=black]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);   
+    \end{scope}
+  \end{tikzpicture} 
+\end{frame}
+\miniframesoff
+\begin{frame}{Subproblem 2: Line Exploration}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[small node,fill=black] (b) at (2,5) {};
+      \node[small node,fill=black] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=black]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+    \\[0.5in]  
+    \begin{itemize}
+     \item Starting from consecutive configuration, explore the line and stop.
+     \item $n$ odd, $\# robots$ odd
+    \end{itemize}  
+\end{frame}
+
+\begin{frame}{Actual Line Exploration}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[small node,fill=black] (b) at (2,5) {};
+      \node[small node,fill=orange] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=black]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=orange] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=black]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=black]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=orange]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=gray]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=orange] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=gray]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=orange] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=gray]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=orange] (k) at (16,5) {};
+      \node[small node,fill=gray] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=gray]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=orange] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.
+    \end{itemize} 
+\end{frame}
+\begin{frame}{Subproblem 2: Exploration Phase}
+ \begin{tikzpicture}[scale=0.6,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+     \begin{scope}[yshift=-3cm]
+     \node[diamond,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=black] (d) at (6,5) {};
+       \node[small node,fill=black] (e) at (8,5) {};    
+      \node[small node,fill=gray]  (f) at (10,5) {};
+      %\node[small node,fill=pink]  at (10,5) {};
+      \node[small node,fill=gray] (i) at (12,5) {};
+      \node[small node,fill=gray] (j) at (14,5) {};
+      \node[small node,fill=gray] (k) at (16,5) {};
+      \node[small node,fill=black] (l) at (18,5) {};
+      %\node[small node,fill=gray] (m) at (20,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[-,line width=0.3pt] (c) edge (d);
+       \path[-,line width=0.3pt]  (d) edge (e);
+      \path[-,line width=0.3pt] (e) edge (f);
+      \path[-,line width=0.3pt] (f) edge (i);
+      \path[-,line width=0.3pt] (i) edge (j);
+      \path[-,line width=0.3pt] (j) edge (k);
+      \path[-,line width=0.3pt] (k) edge (l);
+      %\path[-,line width=0.3pt] (l) edge (m);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+    \end{scope}
+  \end{tikzpicture} 
+  \\[0.5in]  
+  \begin{itemize}
+     \item Move second robot from the border to the first one. \\
+     \textcolor{orange}{Exploration Phase}
+     \item Move external robot along the line.     \\
+     \textcolor{orange}{Line Explored}
+     \item Termination: Exploring robotreaches the other end
+    \end{itemize} 
+\end{frame}
+\miniframeson
+\begin{frame}
+Algorithm : Setup Phase + Exploration Phase
+   \begin{itemize}
+     \item Any initial configuration. 
+     \item Line explored.
+     \item Uniqually identified termination configuraions.
+    \end{itemize} 
+\end{frame}
+\miniframesoff
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\scshape Results}
 \subsection{Frame 1}
-\begin{frame}{Frame 1}
+\miniframeson
+\begin{frame}{Final configuration}
 
 \end{frame}
+\miniframesoff
 
 \end{document}
