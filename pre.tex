@@ -847,6 +847,28 @@
     \end{scope}
   \end{tikzpicture}
 \end{frame}
+\begin{frame}{Robots: Deterministic} %%% CYCLE 7 %%%
+\begin{center}
+    \begin{tikzpicture}[scale=0.8,->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+    thick,main node/.style={circle,draw,font=\footnotesize}, small node/.style={circle,font=\footnotesize,inner sep=0pt,minimum size=5pt}]   
+   \begin{scope}%[xshift=10cm]
+     \node[small node,fill=black] (b) at (2,5) {};
+      \node[small node,fill=gray] (c) at (4,5) {};
+      %\node[inner sep=0pt]  (d) at (6,5) {\includegraphics[width=.03\textwidth,right]{robot1.jpg}};
+       \node[small node,fill=brown] (d) at (6,5) {};
+       \node[small node,fill=gray] (e) at (8,5) {};  
+       \node[small node,fill=black]  (f) at (10,5) {};
+       \path[-,line width=0.3pt] (b) edge (c);
+       \path[<-,line width=0.6pt, color=brown] (c) edge (d);
+       \path[->,line width=0.6pt, color=brown]  (d) edge (e);
+       \path[-,line width=0.3pt]  (e) edge (f);
+      %\path[-,line width=0.3pt, color=pink] (f) edge [bend left,-] (8.8,6.8);       
+
+    \end{scope}
+  \end{tikzpicture}
+  \end{center}
+  
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2475,7 +2497,27 @@ from \textcolor{blue}{\textit{initial configuration} } to \textcolor{brown}{\tex
   Line is not explored. $\Rightarrow\Leftarrow$ %$\smashtimes$
 \end{frame}
 \miniframeson
-\begin{frame}{Other results}
+\begin{frame}{Results}
+\begin{table}[ht]
+ \centering
+ \begin{tabular}{c|c|c}
+  \hline \hline
+  \# robots & \# nodes & possible? \\
+  \hline \hline
+  $k = 1$ & any $n$ & No \\
+  \hline
+  $k = 2$ & any $n$ & No \\
+  \hline
+  $k = 3$ or $k \geq 5$ & any $n$ & Yes \\
+  \hline
+  $k = 4$ & even $n$ & No \\
+  \hline
+  $k = 4$ & odd $n$ & Yes \\
+ \end{tabular}
+
+\end{table}
+
+
 
 \end{frame}
 \begin{frame}
